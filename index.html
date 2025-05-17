@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>AniMind</title>
+        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <link rel="manifest" href="manifest.json">
+        <link rel="icon" href="icon-512.jpg" type="image/png">
+        <link rel="apple-touch-icon" href="icon-512.jpg">
+        <meta name="theme-color" content="#000000">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    </head>
+    <body id="color">
+
+
+        <div id="info">
+    <div id="divaj">
+        <h1>Ajouter un élément</h1>
+        
+        <input class="inaj" id="nom" placeholder="Nom de l'œuvre" required>
+        
+        <div class="file-input-container">
+            <input class="inaj" id="image" type="file" accept="image/*" style="display: none;">
+            <label for="image" class="file-input-label">
+                <i>📁</i>
+                <div class="file-input-text">Glissez-déposez une image ou <span>parcourir</span></div>
+            </label>
+        </div>
+        
+        <div class="image-preview-container">
+            <img id="imagePreview" class="image-preview" alt="Aperçu de l'image">
+        </div>
+        
+        <input class="inaj" id="nbEpisode" placeholder="Nombre d'épisodes" type="number" min="0" max="1000">
+        <input class="inaj" id="nHistoire" placeholder="Note Histoire (0-10)" type="number" min="0" max="10">
+        <input class="inaj" id="nGraphisme" placeholder="Note Graphisme (0-10)" type="number" min="0" max="10">
+        <input class="inaj" id="nPerso" placeholder="Note Personnages (0-10)" type="number" min="0" max="10">
+        <input class="inaj" id="nInteret" placeholder="Note Emotion (0-10)" type="number" min="0" max="10">
+        
+        <select class="inaj" id="animeType">
+            <option value="" disabled selected>Type d'œuvre</option>
+            <option value="anime">Anime</option>
+            <option value="film">Film</option>
+            <option value="webtoon">Webtoon</option> 
+        </select>
+
+   <div class="form-group">
+    <label for="genreInput">Genres :</label>
+    <div class="genre-input-container">
+        <input type="text" id="genreInput" class="inaj" list="genreSuggestions" placeholder="Tapez un genre...">
+        <datalist id="genreSuggestions">
+            <option value="Art">
+            <option value="Aventure">
+            <option value="Combat">
+            <option value="Comedy">
+            <option value="Démon">
+            <option value="Drame">
+            <option value="Enquete">
+            <option value="Famille">
+            <option value="Fantastique">
+            <option value="Fantasy">
+            <option value="Futur">
+            <option value="Guerre">
+            <option value="Harem">
+            <option value="Héro">
+            <option value="Horreur">
+            <option value="Isekai">
+            <option value="Magie">
+            <option value="Mechas">
+            <option value="Médieval">
+            <option value="Militaire">
+            <option value="Monde Virtuel">
+            <option value="Monstre">
+            <option value="Mystère">
+            <option value="Nostalgie">
+            <option value="Parnormal">
+            <option value="Psycologie">
+            <option value="Quotidien">
+            <option value="Romance">
+            <option value="School-life">
+            <option value="Slice of life">
+            <option value="Sport">
+            <option value="Technologie">
+            <option value="Thriller">
+            <option value="Travail">
+            <option value="Vampire">
+            <option value="Yakuza">
+        </datalist>
+        <button type="button" class="genre-add-btn" onclick="addGenre()">
+            <i class="fas fa-plus"></i>
+        </button>
+    </div>
+    <div id="genresDisplay" class="genres-display"></div>
+</div>
+        
+        <select class="inaj" id="animeStatus">
+            <option value="" disabled selected>Statut</option>
+            <option value="Fini">Fini</option>
+            <option value="En cours">En cours</option>
+            <option value="En visionnage">En visionnage</option> 
+            <option value="Inconnu">Inconnu</option>
+        </select>
+        
+        <button onclick="ajouter()" class="bajouter">
+            <i>+</i> Ajouter l'élément
+        </button>
+        </div>
+    </div>
+
+
+        <div id="recherche" class="search-container">
+    <h1>Recherche par Genres</h1>
+    
+    <div class="genre-search-container">
+        <div class="genre-input-container">
+            <input type="text" id="searchGenreInput" class="inaj" list="genreSuggestions" placeholder="Ajouter un genre...">
+            <datalist id="genreSuggestions">
+                <option value="Action">
+            <option value="Art">
+            <option value="Aventure">
+            <option value="Combat">
+            <option value="Comedy">
+            <option value="Démon">
+            <option value="Drame">
+            <option value="Enquete">
+            <option value="Famille">
+            <option value="Fantastique">
+            <option value="Fantasy">
+            <option value="Futur">
+            <option value="Guerre">
+            <option value="Harem">
+            <option value="Héro">
+            <option value="Horreur">
+            <option value="Isekai">
+            <option value="Magie">
+            <option value="Mechas">
+            <option value="Médieval">
+            <option value="Militaire">
+            <option value="Monde Virtuel">
+            <option value="Monstre">
+            <option value="Mystère">
+            <option value="Nostalgie">
+            <option value="Parnormal">
+            <option value="Psycologie">
+            <option value="Quotidien">
+            <option value="Romance">
+            <option value="School-life">
+            <option value="Slice of life">
+            <option value="Sport">
+            <option value="Technologie">
+            <option value="Thriller">
+            <option value="Travail">
+            <option value="Vampire">
+            <option value="Yakuza">
+            </datalist>
+            <button type="button" class="genre-add-btn" onclick="addSearchGenre()">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+        <div id="searchGenresDisplay" class="genres-display"></div>
+    </div>
+    
+    <button class="bajouter" onclick="filterByGenres()">Filtrer</button>
+    
+    <div id="searchResults" class="search-results">
+        <option value="Apocalypse">
+            <option value="Art">
+            <option value="Aventure">
+            <option value="Combat">
+            <option value="Comedy">
+            <option value="Démon">
+            <option value="Drame">
+            <option value="Enquete">
+            <option value="Famille">
+            <option value="Fantastique">
+            <option value="Fantasy">
+            <option value="Futur">
+            <option value="Guerre">
+            <option value="Harem">
+            <option value="Héro">
+            <option value="Horreur">
+            <option value="Isekai">
+            <option value="Magie">
+            <option value="Mechas">
+            <option value="Médieval">
+            <option value="Militaire">
+            <option value="Monde Virtuel">
+            <option value="Monstre">
+            <option value="Mystère">
+            <option value="Nostalgie">
+            <option value="Parnormal">
+            <option value="Psycologie">
+            <option value="Quotidien">
+            <option value="Romance">
+            <option value="School-life">
+            <option value="Slice of life">
+            <option value="Sport">
+            <option value="Technologie">
+            <option value="Thriller">
+            <option value="Travail">
+            <option value="Vampire">
+            <option value="Yakuza">
+    </div>
+</div>
+
+        <div id="listdiv">
+            <div class="boutons-container">
+                <button class="butNav" onclick="afficherRecherche()"><i class="fas fa-search"></i> Recherche</button>
+                <button onclick="trierParName()" class="bajouter">ordre</button>
+                <button onclick="trierParMoyenne()" class="bajouter">Moyenne</button>
+            </div>
+                <h1>Liste</h1>
+            <ul id="list"></ul>
+            <div id="place"></div>
+        </div>
+
+
+        <div id="modal">
+    <div id="infoModal">
+        <button class="modal-close-btn" onclick="fermerModal()">×</button>
+        <h2 class="modal-title">Détails</h2>
+        
+        <img id="preview" alt="Aperçu">
+        
+        <div class="modal-content">
+            <p class="modalInfo"> <span id="modalContentNom"></span></p>
+            <p class="modalInfo"> <span id="modalContentnbEpisode"></span></p>
+            <p class="modalInfo"> <span id="modalnHistoire"></span></p>
+            <p class="modalInfo"> <span id="modalnGraphisme"></span></p>
+            <p class="modalInfo"><span id="modalnPerso"></span></p>
+            <p class="modalInfo"> <span id="modalnInteret"></span></p>
+            <p class="modalInfo"> <span id="modalAnimeType"></span></p>
+            <p class="modalInfo"> <span id="modalAnimeStatus"></span></p>
+            
+            <div class="modal-average">
+                <p class="modalInfo"><span>Moyenne:</span> <span id="modalMoyenne"></span>/10</p>
+            </div>
+        </div>
+        
+        <div class="modal-actions">
+            <button onclick="modalChangeInfo()">Modifier</button>
+            <button onclick="fermerModal()">Fermer</button>
+        </div>
+        
+        <p id="indexContent" style="display: none;"></p>
+        </div>
+
+            <div id="changeInfo">
+                <input class="inaj" id="nomc" placeholder="Nom"><br>
+                <input class="inaj" id="nbEpisodec" placeholder="nbEpisode" type="number" min="0" max="10"><br>
+                <input class="inaj" id="nHistoirec" placeholder="Histoire" type="number" min="0" max="10"><br>
+                <input class="inaj" id="nGraphismec" placeholder="Graphisme" type="number" min="0" max="10"><br>
+                <input class="inaj" id="nPersoc" placeholder="Personnage" type="number" min="0" max="10"><br>
+                <input class="inaj" id="nInteretc" placeholder="Emotion" type="number" min="0" max="10"><br>
+                <select class="inaj" id="animeTypec">
+                    <option value="anime">anime</option>
+                    <option value="film">film</option>
+                    <option value="webtoon">webtoon</option> 
+                </select><br>
+                <select class="inaj" id="animeStatusc">
+                    <option value="fini">Fini</option>
+                    <option value="en cours">En cours</option>
+                    <option value="en visionnage">En visionnage</option> 
+                    <option value="inconnu">Inconnu</option>
+                </select><br>
+                <div class="form-group">
+        <label for="genreInputEdit">Genres :</label>
+        <div class="genre-input-container">
+            <input type="text" id="genreInputEdit" class="inaj" list="genreSuggestions" placeholder="Tapez un genre...">
+            <datalist id="genreSuggestions">
+
+            </datalist>
+            <button type="button" class="genre-add-btn" onclick="addGenreEdit()">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+        <div id="genresDisplayEdit" class="genres-display"></div>
+    </div>
+                <button onclick="changeInfo()" class="bajouter">Ajouter</button>
+                <button onclick="fermerModal()" class="bajouter">annuler</button>
+                <button onclick="supprimer()" class="bajouter">supprimer</button>
+            </div>
+        </div>
+        <div id="navbar">
+            <button class="butNav" onclick="affAjouter()">Ajouter</button>
+            <button class="butNav" onclick="affList()">Liste</button>
+            <button class="butNav" onclick="affStat()">Statistique</button>
+            <button class="butNav" onclick="affexp()">Exporter</button>
+        </div>
+
+
+
+
+        <div id="statistique">
+            <h1>Statistique</h1>
+            <div class="boutons-container">
+                <button onclick="minute()" class="bajouter">minute</button>
+                <button onclick="heure()" class="bajouter">heure</button>
+                <button onclick="jour()" class="bajouter">jour</button>
+            </div>
+            <div id="animestat" class="tableau">
+    <h2>Statistique: ANIME</h2>
+    <div class="stat-row">
+        <span class="stat-label">Nombre d'animes vus</span>
+        <span class="stat-value" id="nbanv"></span>
+    </div>
+    <div class="stat-row">
+        <span class="stat-label">Nombre d'épisodes vus</span>
+        <span class="stat-value" id="nbepan"></span>
+    </div>
+    <div class="stat-row">
+        <span class="stat-label">Temps de visionnage</span>
+        <span class="stat-value" id="tpan"></span>
+    </div>
+</div>
+<div id="filmstat" class="tableau">
+    <h2>Statistique: FILM</h2>
+    <div class="stat-row">
+        <span class="stat-label">Nombre d'animes vus</span>
+        <span class="stat-value" id="nbflv"></span>
+    </div>
+    <div class="stat-row">
+        <span class="stat-label">Nombre d'épisodes vus</span>
+        <span class="stat-value" id="nbepfl"></span>
+    </div>
+    <div class="stat-row">
+        <span class="stat-label">Temps de visionnage</span>
+        <span class="stat-value" id="tpsfl"></span>
+    </div>
+</div>
+<div id="webtoonstat" class="tableau">
+    <h2>Statistique: WEBTOON</h2>
+    <div class="stat-row">
+        <span class="stat-label">Nombre d'animes vus</span>
+        <span class="stat-value" id="nbwv"></span>
+    </div>
+    <div class="stat-row">
+        <span class="stat-label">Nombre d'épisodes vus</span>
+        <span class="stat-value" id="nbepw"></span>
+    </div>
+    <div class="stat-row">
+        <span class="stat-label">Temps de visionnage</span>
+        <span class="stat-value" id="tpsw"></span>
+    </div>
+</div>
+            <div id="place"></div>
+        </div>
+
+
+        <div id="export"> 
+    <h1>Exporter</h1>
+    
+    <div class="export-actions">
+        <div class="export-action-group">
+            <h2>Gestion des données</h2>
+            <div class="export-buttons">
+                <button onclick="telechargerJSON()" class="export-btn">
+                    <i>↓</i> Télécharger JSON
+                </button>
+                
+                <div class="file-input-wrapper">
+                    <input id="file-upload" type="file" accept=".json" onchange="importerJSON(event)" class="bajouter" />
+                    <label for="file-upload" class="file-input-label">
+                        <i>↑</i> Importer JSON
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="links-section">
+        <h2>Liens utiles</h2>
+        <div class="links-grid">
+            <div class="link-card">
+                <div class="link-icon">🔗</div>
+                <div class="link-text">
+                    <a href="https://anime-sama.fr/" target="_blank">Anime-sama</a>
+                    <div class="link-description">Streaming d'anime</div>
+                </div>
+            </div>
+            
+            <div class="link-card">
+                <div class="link-icon">🔗</div>
+                <div class="link-text">
+                    <a href="https://franime.fr/" target="_blank">Fr Anime</a>
+                    <div class="link-description">Communauté anime française</div>
+                </div>
+            </div>
+            
+            <div class="link-card">
+                <div class="link-icon">🔗</div>
+                <div class="link-text">
+                    <a href="https://voirdrama.org/" target="_blank">Voir Drama</a>
+                    <div class="link-description">Dramas asiatiques</div>
+                </div>
+            </div>
+            
+            <div class="link-card">
+                <div class="link-icon">🔗</div>
+                <div class="link-text">
+                    <a href="https://www.scan-manga.com/" target="_blank">Scan Manga</a>
+                    <div class="link-description">Mangas en ligne</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    </body>
+
+
+    <script src="script.js"></script>
+    <script src="nav.js"></script>
+    <script src="statistique.js"></script>
+    <script src="importer.js"></script>
+    <script src="genre.js"></script>
+</html>
+
+
+
+
+
