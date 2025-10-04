@@ -145,8 +145,8 @@ function trierParName () {
 
 function trierParMoyenne() {
     list.sort((a, b) => {
-    const moyenneA = (a.nHistoire + a.nGraphisme + a.nPerso + a.nInteret) / 4;
-    const moyenneB = (b.nHistoire + b.nGraphisme + b.nPerso + b.nInteret) / 4;
+    const moyenneA = (Number(a.nHistoire) + Number(a.nGraphisme) + Number(a.nPerso) + Number(a.nInteret)) / 4;
+    const moyenneB = (Number(b.nHistoire) + Number(b.nGraphisme) + Number(b.nPerso) + Number(b.nInteret)) / 4;
     return moyenneB - moyenneA;
     });
     console.log(list);
@@ -206,4 +206,5 @@ function handleDrop(e) {
     fileInput.files = files;
     const event = new Event('change');
     fileInput.dispatchEvent(event);
+
 }
